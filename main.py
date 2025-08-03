@@ -1,5 +1,7 @@
+import request
+
 def main():
-    print("Hello from ftcscout-api!")
+    print(request.getTeamsFromEvent("FTCCMP1FRAN"))
 
 
 if __name__ == "__main__":

@@ -57,8 +57,6 @@ teams = data["data"]["eventByCode"]["teams"]
 # Removing unnecessary matches
 for team in teams[:]:
     matches = team["matches"]
-    for match in matches:
-        print(match["match"]["description"][0])
     
     # Filter out non-"M" matches
     team["matches"] = [match for match in matches 

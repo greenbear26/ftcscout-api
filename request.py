@@ -38,6 +38,7 @@ payload = {
     "variables": variables
 }
 
+data = None
 try:
     # Make the POST request with JSON data
     response = requests.post(url, json=payload)
@@ -46,8 +47,21 @@ try:
     if response.status_code == 200:
         data = response.json()
         print("POST Request Successful:")
-        print(data)
     else:
         print(f"Error: {response.status_code}")
 except requests.exceptions.RequestException as e:
     print(f"An error occurred: {e}")
+
+teams = data["data"]["eventByCode"]["teams"]
+
+# Removing unnecessary matches
+for team in teams[:]:
+    matches = team["matches"]
+    for match in matches:
+        print(match["match"]["description"][0])
+    
+    # Filter out non-"M" matches
+    team["matches"] = [match for match in matches 
+                      if match["match"]["description"][0] == "M"]
+
+print(teams)

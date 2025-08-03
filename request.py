@@ -3,22 +3,33 @@ import requests
 url = "https://api.ftcscout.org/graphql"
 
 query = """
-    query ExampleQuery($number: Int!) {
-      teamByNumber(number: $number) {
-        name
-        rookieYear
-        location {
-            country
-            state
-            city
+    query Query($season: Int!, $code: String!) {
+      eventByCode(season: $season, code: $code) {
+        teams {
+          teamNumber
+          stats {
+            ... on TeamEventStats2024 {
+              rank
+            }
+          }
+          awards {
+            type
+            placement
+          }
+          matches {
+            match {
+              description
+            }
+            alliance
+          }
         }
-        schoolName
       }
     }
 """
 
 variables = {
-    "number": 19411
+  "season": 2024,
+  "code": "FTCCMP1FRAN"
 }
 
 # Data to be sent in the request body

@@ -22,6 +22,7 @@ def getTeamsFromEvent(eventCode):
                   description
                 }
                 alliance
+                onField
               }
             }
           }

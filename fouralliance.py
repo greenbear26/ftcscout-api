@@ -1,9 +1,11 @@
+import math
+
 def countAdvancement(teams):
     for team in teams:
         matches = team["matches"]
         if (matches):
             final_match = matches[len(matches)-1]["match"]["description"]
-            final_match_number = int(final_match[2:])
+            final_match_number = math.floor(float(final_match[2:]))
             if final_match_number == 3:
                 team["points"] += 5
             elif final_match_number == 5:
@@ -20,7 +22,7 @@ def countAlliance(teams):
         matches = team["matches"]
         if matches:
             first_match = matches[0]["match"]["description"]
-            first_match_number = int(first_match[2:])
+            first_match_number = math.floor(float(first_match[2:]))
             match_color = matches[0]["alliance"]
 
             alliance_number = 0

@@ -55,6 +55,9 @@ def getTeamsFromEvent(eventCode):
 
     teams = data["data"]["eventByCode"]["teams"]
 
+    # Removing empty teams
+    teams = [team for team in teams if team["stats"]]
+
 # Removing unnecessary matches
     for team in teams:
         matches = team["matches"]

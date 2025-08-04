@@ -65,7 +65,8 @@ def getTeamsFromEvent(eventCode):
         matches = team["matches"]
         # Filter out non-"M" matches
         team["matches"] = [match for match in matches 
-                          if match["match"]["description"][0] == "M"]
+                          if match["match"]["description"][0] == "M" or
+                           match["match"]["description"][0] == "F"]
 
         # Adding poitns attribute to every team
         team["points"] = 0

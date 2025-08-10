@@ -15,7 +15,8 @@ def countAwards(teams):
         awards = team["awards"]
         if (awards):
             for award in awards:
-                if award["type"] == "Winner" or award["type"] == "Finalist":
+                if award["type"] == "Winner" or award["type"] == "Finalist" or \
+                award["type"] == "DeansListFinalist":
                     continue
                 elif award["type"] == "Inspire":
                     team["points"] += (2**(3 - award["placement"]) * 15)
@@ -86,6 +87,7 @@ def main():
 
     dataframe = pandas.DataFrame({
         "Team Number": [team["teamNumber"] for team in teams],
+        "Team Name": [team["team"]["name"] for team in teams],
         "Points": [team["points"] for team in teams]
     })
 

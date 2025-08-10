@@ -25,6 +25,9 @@ def getTeamsFromEvent(eventCode):
                 onField
                 allianceRole
               }
+              team {
+                name
+              }
             }
           }
         }

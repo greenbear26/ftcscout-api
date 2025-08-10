@@ -1,0 +1,10 @@
+[theme]
+backgroundColor="#fdfdf9"
+secondaryBackgroundColor="#f0f0ed"
+textColor="#3d3a2c"
+linkColor="#e6aa43"
+linkUnderline=false
+font="arial"
+showWidgetBorder=true
+borderColor="#000000"
+dataframeHeaderBackgroundColor="#e6aa43"

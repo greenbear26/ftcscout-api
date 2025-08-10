@@ -59,15 +59,22 @@ def countAlliance(teams):
 
 
 def main():
-    streamlit.title("FTC 2024: Into the Deep advancement points calculator")
+    manual = "https://www.firstinspires.org/resource-library/ftc/game-and-season-info"
+    streamlit.title(":blue[FTC 2024: Into the Deep] Advancement Points Calculator")
+    streamlit.write("This program will calculate the points that teams at a\
+                    given competition would get using the 2025 points ranking\
+                    system. For the most part, the calculation follows the\
+                    calculation detailed in the 2025 [competition manual](%s), with\
+                    some exceptions regarding alliances at worlds." % manual)
+
     # if len(sys.argv) > 1:
     event_code = streamlit.text_input("Event Code")
     try:
         teams = request.getTeamsFromEvent(event_code)
     except:
-        url = "https://ftc-events.firstinspires.org/2024#allevents"
+        ftc_events = "https://ftc-events.firstinspires.org/2024#allevents"
         streamlit.write("Event code not valid. Refer to [FTCEvents](%s) for valid\
-                        event codes." % url)
+                        event codes." % ftc_events)
         return
     
     countAwards(teams)
@@ -83,6 +90,8 @@ def main():
     })
 
     streamlit.dataframe(dataframe, hide_index=True)
+
+    streamlit.write("###### Created by Rishi Ponnapalli")
 
 
 if __name__ == "__main__":

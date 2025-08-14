@@ -1,40 +1,42 @@
 import requests
 
-def getTeamsFromEvent(eventCode):
+def getTeamsFromEvent(eventCode, season):
     url = "https://api.ftcscout.org/graphql"
 
-    query = """
-        query Query($season: Int!, $code: String!) {
-          eventByCode(season: $season, code: $code) {
-            teams {
+    statsQuery = str(season)+"Trad" if season==2020 or season==2021 else season
+
+    query = f"""
+        query Query($season: Int!, $code: String!) {{
+          eventByCode(season: $season, code: $code) {{
+            teams {{
               teamNumber
-              stats {
-                ... on TeamEventStats2024 {
+              stats {{
+                ... on TeamEventStats{statsQuery} {{
                   rank
-                }
-              }
-              awards {
+                }}
+              }}
+              awards {{
                 type
                 placement
-              }
-              matches {
-                match {
+              }}
+              matches {{
+                match {{
                   description
-                }
+                }}
                 alliance
                 onField
                 allianceRole
-              }
-              team {
+              }}
+              team {{
                 name
-              }
-            }
-          }
-        }
+              }}
+            }}
+          }}
+        }}
     """
 
     variables = {
-      "season": 2024,
+      "season": season,
       "code": eventCode
     }
 
@@ -68,8 +70,7 @@ def getTeamsFromEvent(eventCode):
         matches = team["matches"]
         # Filter out non-"M" matches
         team["matches"] = [match for match in matches 
-                          if match["match"]["description"][0] == "M" or
-                           match["match"]["description"][0] == "F"]
+                          if match["match"]["description"][0] != "Q"]
 
         # Adding poitns attribute to every team
         team["points"] = 0

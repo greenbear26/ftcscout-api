@@ -1,42 +1,19 @@
 import streamlit
 import sys
-import math
 import pandas
-from scipy.special import erfinv
 
 import request
-import eightalliance
-import sixalliance
-import fouralliance
-import twoalliance
+import utils.general as general
+import utils.doubleelim.eightalliance as eightalliance
+import utils.doubleelim.sixalliance as sixalliance
+import utils.doubleelim.fouralliance as fouralliance
+import utils.doubleelim.twoalliance as twoalliance
 
 def countAwards(teams):
-    for team in teams:
-        awards = team["awards"]
-        if (awards):
-            for award in awards:
-                if award["type"] == "Winner" or award["type"] == "Finalist" or \
-                award["type"] == "DeansListFinalist":
-                    continue
-                elif award["type"] == "Inspire":
-                    team["points"] += (2**(3 - award["placement"]) * 15)
-                else:
-                    team["points"] += (2**(3 - award["placement"]) * 3)
+    general.countAwards(teams)
 
 def countRanking(teams):
-    # step = 14 / (len(teams) - 1)
-    for team in teams:
-        # inverted_rank = (len(teams) - team["stats"]["rank"])
-        # team["points"] += math.floor(inverted_rank * step) + 2
-
-        n = len(teams)
-        r = team["stats"]["rank"]
-        alpha = 1.07
-
-        # Standard formala given by competition manual
-        qual_points = erfinv((n - 2*r + 2) / (alpha*n)) * 7 / erfinv(1 / alpha) + 9
-
-        team["points"] += math.floor(qual_points)
+    general.countRanking(teams)
 
 def countAdvancement(teams):
     if len(teams) > 40:
@@ -71,7 +48,7 @@ def main():
     # if len(sys.argv) > 1:
     event_code = streamlit.text_input("Event Code")
     try:
-        teams = request.getTeamsFromEvent(event_code)
+        teams = request.getTeamsFromEvent(event_code, 2024)
     except:
         ftc_events = "https://ftc-events.firstinspires.org/2024#allevents"
         streamlit.write("Event code not valid. Refer to [FTCEvents](%s) for valid\

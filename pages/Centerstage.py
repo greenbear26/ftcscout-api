@@ -18,7 +18,6 @@ def countAdvancement(teams):
 def countAlliance(teams):
     predoubleelim.countAlliance(teams)
 
-
 def main():
     manual = "https://www.firstinspires.org/resource-library/ftc/game-and-season-info"
     streamlit.title(":orange[FTC 2023: Centerstage] Advancement Points Calculator")
@@ -27,6 +26,11 @@ def main():
                     system. The calculation follows the\
                     specifics detailed in the 2025 [competition manual](%s), \
                     with these small tweaks:" % manual)
+    streamlit.write("- Both semifinalist alliances will receive 10 points,\
+                    because there is no way to distinguish between 3rd and 4th\
+                    place.") 
+    streamlit.write("- 2nd picks of alliances will get 4 points less than\
+                    captains and first picks.")
 
     event_code = streamlit.text_input("Event Code")
     try:

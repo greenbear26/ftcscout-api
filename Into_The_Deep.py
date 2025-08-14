@@ -41,9 +41,17 @@ def main():
     streamlit.title(":blue[FTC 2024: Into the Deep] Advancement Points Calculator")
     streamlit.write("This program will calculate the points that teams at a\
                     given competition would get using the 2025 points ranking\
-                    system. For the most part, the calculation follows the\
-                    calculation detailed in the 2025 [competition manual](%s), with\
-                    some exceptions regarding alliances at worlds." % manual)
+                    system. The calculation follows the\
+                    specifics detailed in the 2025 [competition manual](%s), \
+                    with these small tweaks:" % manual)
+    streamlit.write("- Second picks on alliances at worlds will receive 1 less \
+                    point per pick based on the order they were picked. Ex. The\
+                    second pick of the 8th alliance receives 7 more points\
+                    than the second pick of the 1st alliance because of the \
+                    snake draft.")
+    streamlit.write("- Teams on alliances at worlds who don't play in any \
+                    elimination matches do not get points for alliance \
+                    advancement, but do get points for being on the alliance.")
 
     # if len(sys.argv) > 1:
     event_code = streamlit.text_input("Event Code")

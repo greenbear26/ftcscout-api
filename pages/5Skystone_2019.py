@@ -20,7 +20,7 @@ def countAlliance(teams):
 
 def main():
     manual = "https://www.firstinspires.org/resource-library/ftc/game-and-season-info"
-    streamlit.title(":green[FTC 2020: Ultimate Goal] Advancement Points Calculator")
+    streamlit.title(":blue[FTC 2019: Skystone] Advancement Points Calculator")
     streamlit.write("This program will calculate the points that teams at a\
                     given competition would get using the 2025 points ranking\
                     system. The calculation follows the\
@@ -31,14 +31,14 @@ def main():
                     place.") 
     streamlit.write("- 2nd picks of alliances will get 4 points less than\
                     captains and first picks.")
-    streamlit.write("**Only Traditional Tournaments are accessible right\
-                    now.**")
+    streamlit.write("**Some of the data appears to be bugged in the API, which\
+                    may lead to misleading results.**")
 
     event_code = streamlit.text_input("Event Code")
     try:
-        teams = request.getTeamsFromEvent(event_code, 2020)
+        teams = request.getTeamsFromEvent(event_code, 2019)
     except:
-        ftc_events = "https://ftc-events.firstinspires.org/2020#allevents"
+        ftc_events = "https://ftc-events.firstinspires.org/2019#allevents"
         streamlit.write("Event code not valid. Refer to [FTCEvents](%s) for valid\
                         event codes." % ftc_events)
         return
